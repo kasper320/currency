@@ -101,13 +101,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            ExchangeRate currency;
-            String currencyJson = s;
+            Rates rates=null;
             ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                rates = objectMapper.readValue(s, Rates.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            String result = currency.toString();
 
-            show.setText(result);
+
+            show.setText(rates.toString());
         }
     }
 
